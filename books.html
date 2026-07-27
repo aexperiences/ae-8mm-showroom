@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Metrics · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"books.html", crumb:"Studio Metrics" }), d = E.db();
+  c.appendChild(E.page("Studio Metrics","Margin by production, budget variance, bid-win rate — computed from the studio's own productions, not reconstructed at year end. Benchmarks are estimates and tagged as such."));
+  var gm = E.grossMargin(d), go=d.pitches.filter(function(p){return p.decision==="GO";}).length, tot=d.pitches.length;
+  c.appendChild(E.card('<h2>The board</h2><div class="statrow">'+
+    E.stat("Gross margin", E.pct(gm), "fee − actual, blended", gm>=25?"good":"watch")+
+    E.stat("Budgeted", E.money(E.totalBudget(d)), "across the slate")+
+    E.stat("Actual", E.money(E.totalActual(d)), "to date")+
+    E.stat("Over budget", E.overBudget(d).length, "productions", E.overBudget(d).length?"bad":"good")+
+    E.stat("Slate delivered", d.productions.filter(function(p){return p.delivered;}).length+" / "+d.productions.length, "cleared + paid","gold")+
+    '</div>'+E.srcNote(E.BENCH.grossMargin.src)));
+  c.appendChild(E.card('<h2>What 8mm OS replaces</h2><div class="card-sub">One studio OS instead of the stack.</div><table><thead><tr><th>Tool today</th><th>What it does</th><th>Roughly</th></tr></thead><tbody>'+
+    E.REPLACES.map(function(r){return '<tr><td class="t-main">'+E.esc(r.tool)+'</td><td>'+E.esc(r.job)+'</td><td class="small muted">'+E.esc(r.cost)+'</td></tr>';}).join("")+'</tbody></table>'));
+})();
+</script></body></html>

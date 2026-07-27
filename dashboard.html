@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Command Center · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"dashboard.html", crumb:"Command Center" }), d = E.db();
+  c.appendChild(E.page("Command Center","The whole studio on one sheet. Budgets, clearance and the wrap are computed from this OS's own productions — not typed in and not reconstructed at wrap."));
+
+  /* signature row: margin, budget variance, deliverable blocked, wrap */
+  var gm = E.grossMargin(d), over = E.overBudget(d);
+  var casc = d.productions.filter(function(p){return p.name.indexOf("Cascade")>=0;})[0];
+  c.appendChild(E.card(
+    '<h2>The slate, by the numbers</h2><div class="card-sub">Fee vs. actual spend across every production — the margin is the business.</div>'+
+    '<div class="statrow">'+
+      E.stat("Gross margin", E.pct(gm), "fee − actual, across the slate", gm>=25?"good":"watch")+
+      E.stat("Budgeted", E.money(E.totalBudget(d)), "estimated across productions")+
+      E.stat("Actual spend", E.money(E.totalActual(d)), "to date", over.length?"watch":"good")+
+      E.stat("Over budget", over.length, over.length?over.map(function(p){return p.name.split(" — ")[0];}).join(", "):"none", over.length?"bad":"good")+
+      E.stat("Active productions", E.activeProds(d).length, "in pre-pro, production or post", "gold")+
+    '</div>'+E.srcNote(E.BENCH.grossMargin.src)
+  ));
+
+  /* the rights-gate: what's blocked from delivery */
+  var blockedProds = d.productions.filter(function(p){ return !p.delivered && !E.canDeliver(d, p.name) && p.stage==="Post"; });
+  var allOpen = E.unsignedClearances(d);
+  c.appendChild(E.card(
+    '<div class="between"><div><h2>The rights-gate</h2><div class="card-sub">Nothing leaves the delivery vault until every release and license is signed. Delivering uncleared is a copyright event, not a scheduling call.</div></div>'+
+    '<div>'+E.tag(allOpen.length+" unsigned", allOpen.length?"crim":"good")+'</div></div>'+
+    (blockedProds.length ?
+      '<table><thead><tr><th>Production</th><th style="width:150px">Clearance</th><th>Delivery</th></tr></thead><tbody>'+
+      blockedProds.map(function(p){ var open=E.unsignedClearances(d,p.name);
+        return '<tr><td><div class="t-main">'+E.esc(p.name)+'</div><div class="t-sub">'+E.esc(p.client)+' · '+open.length+' unsigned</div></td>'+
+        '<td class="fillcell"><span class="mono small">'+p.clearPct+'%</span><div class="bar crim"><i style="width:'+p.clearPct+'%"></i></div></td>'+
+        '<td><span class="chip hold">✗ blocked</span></td></tr>'; }).join("")+'</tbody></table>'
+      : '<div class="empty">Every in-post production is fully cleared and free to deliver.</div>')+
+    '<div class="fence crim" style="margin-top:12px"><b>Cascade is asking for its master</b> — held. The org can stage the delivery, but it will not open the vault until clearance is 100%. <a href="clearances.html">Work the clearance vault →</a></div>'
+  ));
+
+  /* the wrap readiness */
+  c.appendChild(E.card(
+    '<div class="between"><div><h2>Wrap readiness</h2><div class="card-sub">How close each production is to a compiled wrap book — the thing a producer usually spends weeks assembling by hand.</div></div><div>'+E.tag("One-Click Wrap", "gold")+'</div></div>'+
+    '<table><thead><tr><th>Production</th><th>Stage</th><th style="width:170px">Wrap complete</th><th></th></tr></thead><tbody>'+
+    d.productions.map(function(p){ var w=E.wrapReadiness(p); var done=w>=100;
+      return '<tr><td><div class="t-main">'+E.esc(p.name)+'</div><div class="t-sub">'+E.esc(p.number)+'</div></td><td>'+E.tag(p.stage, p.delivered?"good":"ghost")+'</td>'+
+      '<td class="fillcell"><span class="mono small">'+w+'%</span><div class="bar '+(done?"good":"")+'"><i style="width:'+w+'%"></i></div></td>'+
+      '<td>'+(done?'<span class="chip clear">✓ ready</span>':'<a class="btn ghost sm" href="wrap.html">Open wrap →</a>')+'</td></tr>'; }).join("")+'</tbody></table>'
+  ));
+
+  /* pending fences */
+  var pend = E.approvals().filter(function(a){return a.state==="Pending";});
+  c.appendChild(E.card('<div class="between"><div><h2>On the Approval Desk</h2><div class="card-sub">Ghost Mode — the org clears what it can; only fences (deliver, spend, a fee) reach you.</div></div><div>'+E.tag(pend.length+" pending", pend.length?"watch":"good")+'</div></div>'+
+    '<div class="stack">'+pend.map(function(a){return '<div class="fence'+(a.kind==="deliver"||a.kind==="wrap"?" crim":"")+'"><b>'+E.esc(a.title)+'</b><br><span class="small">'+E.esc(a.summary)+'</span></div>';}).join("")+'</div>'+
+    '<div class="row" style="margin-top:12px"><a class="btn gold sm" href="approvals.html">Open the Approval Desk →</a></div>'));
+})();
+</script></body></html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Budget & Accounting · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"budget.html", crumb:"Budget & Accounting" }), d = E.db();
+  function verdictCard(key){ var r=E.consult(key); if(!r) return null; var v=r.verdict,p=r.passed,dp=r.dept;
+    return E.card('<div class="between"><div><h2>'+E.esc(dp.name)+' · the org\'s read</h2><div class="card-sub">'+E.esc(dp.dh.line)+'</div></div><div>'+E.tag((p?"released":"held")+" · "+v.conf+"%",p?"good":"watch")+'</div></div><div class="fence'+(p?'':' crim')+'">'+E.esc(v.stance)+'</div><div class="conf"><span class="muted small">bar '+dp.gate+'%</span><span class="conf-bar"><i class="conf-fill '+(p?'':'under')+'" style="width:'+v.conf+'%"></i><span class="conf-gate" style="left:'+dp.gate+'%"></span></span><span class="conf-n">'+v.conf+'%</span></div><ul class="reasons">'+v.reasons.map(function(x){return '<li><span class="rtag '+x.t+'">'+x.t.toUpperCase()+'</span><span>'+E.esc(x.s)+'</span></li>';}).join("")+'</ul>'); }
+  c.appendChild(E.page("Budget & Accounting","The AICP top sheet — estimated vs actual across Above the Line, Below the Line, Post, and Wrap. Digital POs and petty cash (crew photograph receipts on set), timecards with union overtime. This is what kills Movie Magic."));
+  var sample = "Cascade Outdoors — Brand Film";
+  var lines = d.budget.filter(function(b){return b.production===sample;});
+  var groups = {}; lines.forEach(function(l){ (groups[l.group]=groups[l.group]||[]).push(l); });
+  var estT=lines.reduce(function(s,l){return s+l.est;},0), actT=lines.reduce(function(s,l){return s+l.act;},0);
+  c.appendChild(E.card('<div class="between"><div><h2>Top sheet — '+E.esc(sample)+'</h2><div class="card-sub">Estimated vs actual, by AICP group.</div></div><div>'+E.tag(actT>estT?("over by "+E.money(actT-estT)):("under by "+E.money(estT-actT)), actT>estT?"bad":"good")+'</div></div>'+
+    '<table><thead><tr><th>Group</th><th>Line</th><th class="num">Estimated</th><th class="num">Actual</th><th class="num">Variance</th></tr></thead><tbody>'+
+    E.BUDGET_GROUPS.filter(function(g){return groups[g.k];}).map(function(g){ return groups[g.k].map(function(l,i){ var vr=l.act-l.est;
+      return '<tr>'+(i===0?'<td class="t-main" rowspan="'+groups[g.k].length+'">'+E.esc(g.name)+'</td>':'')+'<td>'+E.esc(l.line)+'</td><td class="num">'+E.money(l.est)+'</td><td class="num">'+E.money(l.act)+'</td><td class="num" style="color:'+(vr>0?"var(--crim-2)":"var(--good)")+'">'+(vr>0?"+":"")+E.money(vr)+'</td></tr>'; }).join(""); }).join("")+
+    '<tr style="border-top:2px solid var(--line)"><td class="t-main" colspan="2">TOP SHEET TOTAL</td><td class="num t-main">'+E.money(estT)+'</td><td class="num t-main">'+E.money(actT)+'</td><td class="num t-main" style="color:'+(actT>estT?"var(--crim-2)":"var(--good)")+'">'+(actT>estT?"+":"")+E.money(actT-estT)+'</td></tr>'+
+    '</tbody></table>'+'<div class="srcnote">The weather day pushed Below-the-Line crew over — every dollar of the overage is on the day it happened, not discovered at wrap.</div>'));
+  c.appendChild(E.card('<h2>Every production · estimated vs actual</h2><table><thead><tr><th>Production</th><th class="num">Fee</th><th class="num">Budget</th><th class="num">Actual</th><th class="num">Margin</th></tr></thead><tbody>'+
+    d.productions.map(function(p){ var m=p.fee?((p.fee-p.actual)/p.fee*100):null;
+      return '<tr><td class="t-main">'+E.esc(p.name)+'</td><td class="num">'+(p.fee?E.money(p.fee):"—")+'</td><td class="num">'+E.money(p.budget)+'</td><td class="num">'+E.money(p.actual)+'</td><td class="num">'+(m===null?"—":'<span style="color:'+(m>=25?"var(--good)":"var(--crim-2)")+'">'+m.toFixed(0)+'%</span>')+'</td></tr>'; }).join("")+'</tbody></table>'));
+  var vc=verdictCard("money"); if(vc) c.appendChild(vc);
+})();
+</script></body></html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clearances & Vault · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"clearances.html", crumb:"Clearances & Vault" }), d = E.db();
+  c.appendChild(E.page("Clearances & the Delivery Vault",
+    "This vertical's rights-gate. Every talent and location release, every music and artwork license, every deal memo — logged and signed. The delivery vault stays locked for a production until its clearance hits 100%. In the real build these sign via DocuSign and the set-kiosk; here they toggle in your browser."));
+
+  function render() {
+    var host = document.getElementById("clearbox");
+    var byProd = {};
+    E.db().clearances.forEach(function(cl){ (byProd[cl.production]=byProd[cl.production]||[]).push(cl); });
+    host.innerHTML = Object.keys(byProd).map(function(name){
+      var items = byProd[name], open = items.filter(function(c){return !c.signed;});
+      var can = open.length===0;
+      return '<div class="card"><div class="between"><div><h2>'+E.esc(name)+'</h2><div class="card-sub">'+items.length+' clearance(s) · '+open.length+' unsigned</div></div>'+
+        '<div>'+(can?'<span class="chip clear">✓ cleared — free to deliver</span>':'<span class="chip hold">✗ delivery blocked</span>')+'</div></div>'+
+        '<table><thead><tr><th>Type</th><th>Subject</th><th>Party</th><th>Status</th><th></th></tr></thead><tbody>'+
+        items.map(function(cl){ return '<tr><td>'+E.tag(cl.type, cl.signed?"good":"crim")+'</td><td><div class="t-main">'+E.esc(cl.subject)+'</div><div class="t-sub">'+E.esc(cl.note)+'</div></td><td class="small">'+E.esc(cl.party)+'</td>'+
+          '<td>'+(cl.signed?'<span class="chip clear">signed</span>':'<span class="chip hold">unsigned</span>')+'</td>'+
+          '<td>'+(cl.signed?'':'<button class="btn gold sm" data-sign="'+cl.id+'">Mark signed</button>')+'</td></tr>'; }).join("")+
+        '</tbody></table></div>';
+    }).join("");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-sign]"), function(b){ b.addEventListener("click", function(){ E.signClearance(b.dataset.sign); E.toast("Clearance signed (showroom) — in the real build this is a DocuSign countersign.","ok"); render(); }); });
+  }
+  c.appendChild(E.card('<div class="fence crim"><b>The gate is the product.</b> Delivering a cut with an unsigned music license or an editorial-only artwork license is direct copyright exposure — the kind that gets a spot pulled off air. 8mm refuses the delivery until it\'s clean. Sign the open items below and watch the vault open.</div>'));
+  c.appendChild(E.el('<div id="clearbox"></div>'));
+  render();
+})();
+</script></body></html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Post & Review · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"post.html", crumb:"Post & Review" }), d = E.db();
+  function verdictCard(key){ var r=E.consult(key); if(!r) return null; var v=r.verdict,p=r.passed,dp=r.dept;
+    return E.card('<div class="between"><div><h2>'+E.esc(dp.name)+' · the org\'s read</h2><div class="card-sub">'+E.esc(dp.dh.line)+'</div></div><div>'+E.tag((p?"released":"held")+" · "+v.conf+"%",p?"good":"watch")+'</div></div><div class="fence'+(p?'':' crim')+'">'+E.esc(v.stance)+'</div><div class="conf"><span class="muted small">bar '+dp.gate+'%</span><span class="conf-bar"><i class="conf-fill '+(p?'':'under')+'" style="width:'+v.conf+'%"></i><span class="conf-gate" style="left:'+dp.gate+'%"></span></span><span class="conf-n">'+v.conf+'%</span></div><ul class="reasons">'+v.reasons.map(function(x){return '<li><span class="rtag '+x.t+'">'+x.t.toUpperCase()+'</span><span>'+E.esc(x.s)+'</span></li>';}).join("")+'</ul>'); }
+  c.appendChild(E.page("Post & Client Review","Frame-accurate review — the client draws on the frame and leaves a time-stamped note ('at 01:23 remove the boom mic'). And the delivery vault, which opens only when the invoice is paid AND the rights are clear."));
+  c.appendChild(E.card('<h2>Frame-accurate review — Cascade Outdoors, v4</h2><div class="card-sub">Time-stamped client notes, kept per version — the record of exactly what was approved.</div>'+
+    '<table><thead><tr><th>Timecode</th><th>Note</th><th>By</th><th>Status</th></tr></thead><tbody>'+
+    [["00:04","Logo hold two frames longer","Client","Done"],["00:23","Remove boom shadow, top-left","Client","Done"],["00:41","Warmer grade on the river","Director","In color"],["00:58","Legal super needs the ™","Client","Open"]].map(function(r){return '<tr><td class="k">'+r[0]+'</td><td>'+E.esc(r[1])+'</td><td>'+E.esc(r[2])+'</td><td>'+E.tag(r[3],r[3]==="Done"?"good":(r[3]==="Open"?"crim":"watch"))+'</td></tr>';}).join("")+'</tbody></table>'));
+  c.appendChild(E.card('<h2>Delivery vault</h2><table><thead><tr><th>Production</th><th>Stage</th><th>Paid</th><th>Cleared</th><th>Vault</th></tr></thead><tbody>'+
+    d.productions.map(function(p){ var cleared=E.canDeliver(d,p.name); var open=cleared&&(p.delivered||p.stage==="Post");
+      return '<tr><td class="t-main">'+E.esc(p.name)+'</td><td>'+E.tag(p.stage,"ghost")+'</td><td>'+E.tag(p.delivered?"paid":"open", p.delivered?"good":"ghost")+'</td><td>'+E.tag(p.clearPct+"%", cleared?"good":"crim")+'</td>'+
+      '<td>'+(p.delivered?'<span class="chip clear">✓ delivered</span>':(cleared?'<span class="chip clear">unlocked</span>':'<span class="chip hold">✗ locked</span>'))+'</td></tr>'; }).join("")+'</tbody></table>'+
+    '<div class="fence crim" style="margin-top:12px"><b>Post can be done and the vault still locked.</b> The master doesn\'t ship until clearance is 100% — that\'s the rights-gate, enforced in code. <a href="clearances.html">Clear it →</a></div>'));
+  var vc=verdictCard("post"); if(vc) c.appendChild(vc);
+})();
+</script></body></html>

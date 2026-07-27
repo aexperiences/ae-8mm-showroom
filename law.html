@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Law · Counsel · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"law.html", crumb:"Law · Counsel" }), d = E.db();
+  function verdictCard(key){ var r=E.consult(key); if(!r) return null; var v=r.verdict,p=r.passed,dp=r.dept;
+    return E.card('<div class="between"><div><h2>'+E.esc(dp.name)+' · the org\'s read</h2><div class="card-sub">'+E.esc(dp.dh.line)+'</div></div><div>'+E.tag((p?"released":"held")+" · "+v.conf+"%",p?"good":"watch")+'</div></div><div class="fence'+(p?'':' crim')+'">'+E.esc(v.stance)+'</div><div class="conf"><span class="muted small">bar '+dp.gate+'%</span><span class="conf-bar"><i class="conf-fill '+(p?'':'under')+'" style="width:'+v.conf+'%"></i><span class="conf-gate" style="left:'+dp.gate+'%"></span></span><span class="conf-n">'+v.conf+'%</span></div><ul class="reasons">'+v.reasons.map(function(x){return '<li><span class="rtag '+x.t+'">'+x.t.toUpperCase()+'</span><span>'+E.esc(x.s)+'</span></li>';}).join("")+'</ul>'); }
+  c.appendChild(E.page("Law · Counsel","Entertainment law is a liability minefield — SAG-AFTRA, sync licenses, minors on set, becoming a union signatory. Advisory only: a licensed attorney owns the sign-off, and the confidence bar is capped to prove it."));
+  c.appendChild(E.card('<h2>The docket</h2><table><thead><tr><th>Matter</th><th>Reference</th><th>Risk</th><th>State</th></tr></thead><tbody>'+
+    d.matters.map(function(m){var k=m.risk==="High"?"bad":(m.risk==="Medium"?"watch":"ghost");return '<tr><td><div class="t-main">'+E.esc(m.title)+'</div><div class="t-sub">'+E.esc(m.note)+'</div></td><td class="k">'+E.esc(m.ref)+'</td><td>'+E.tag(m.risk,k)+'</td><td>'+E.tag(m.state,"ghost")+'</td></tr>';}).join("")+'</tbody></table>'+
+    '<div class="fence" style="margin-top:12px"><b>Not a lawyer.</b> This is an advisory read on the rights and the exposure. Anything with real risk routes to entertainment counsel — that\'s why the Law chain\'s confidence is capped under its 85% bar by design.</div>'));
+  var vc=verdictCard("law"); if(vc) c.appendChild(vc);
+})();
+</script></body></html>

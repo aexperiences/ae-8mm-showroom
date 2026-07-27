@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Development & Pitch · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"develop.html", crumb:"Development & Pitch" }), d = E.db();
+  function verdictCard(key){ var r=E.consult(key); if(!r) return null; var v=r.verdict,p=r.passed,dp=r.dept;
+    return E.card('<div class="between"><div><h2>'+E.esc(dp.name)+' · the org\'s read</h2><div class="card-sub">'+E.esc(dp.dh.line)+'</div></div><div>'+E.tag((p?"released":"held")+" · "+v.conf+"%",p?"good":"watch")+'</div></div><div class="fence'+(p?'':' crim')+'">'+E.esc(v.stance)+'</div><div class="conf"><span class="muted small">bar '+dp.gate+'%</span><span class="conf-bar"><i class="conf-fill '+(p?'':'under')+'" style="width:'+v.conf+'%"></i><span class="conf-gate" style="left:'+dp.gate+'%"></span></span><span class="conf-n">'+v.conf+'%</span></div><ul class="reasons">'+v.reasons.map(function(x){return '<li><span class="rtag '+x.t+'">'+x.t.toUpperCase()+'</span><span>'+E.esc(x.s)+'</span></li>';}).join("")+'</ul>'); }
+  c.appendChild(E.page("Development & Pitch","Where the studio acts like a marketing agency — treatments and lookbooks to clients and investors, and the pipeline underneath. The lookbook tracks how long an investor lingers on each slide."));
+  var go=d.pitches.filter(function(p){return p.decision==="GO";}), val=go.reduce(function(s,p){return s+p.value;},0);
+  c.appendChild(E.card('<div class="statrow">'+E.stat("GO pitches",go.length,E.money(val)+" of value","good")+E.stat("In development",d.pitches.length,"across all stages")+E.stat("Weighted",E.money(Math.round(d.pitches.reduce(function(s,p){return s+p.value*p.prob/100;},0))),"probability-adjusted","gold")+'</div>'));
+  c.appendChild(E.card('<h2>The pipeline</h2><table><thead><tr><th>Project</th><th>Client</th><th>Stage</th><th class="num">Value</th><th class="num">Win %</th><th>Signal</th><th>Call</th></tr></thead><tbody>'+
+    d.pitches.map(function(p){var k=p.decision==="GO"?"good":(p.decision==="NO-GO"?"bad":"watch");
+      return '<tr><td><div class="t-main">'+E.esc(p.name)+'</div><div class="t-sub">'+E.esc(p.type)+'</div></td><td>'+E.esc(p.client)+'</td><td>'+E.esc(p.stage)+'</td><td class="num">'+E.money(p.value)+'</td><td class="num">'+p.prob+'%</td><td class="small muted">'+E.esc(p.views)+'</td><td>'+E.tag(p.decision,k)+'</td></tr>';}).join("")+'</tbody></table>'+
+    '<div class="srcnote">The interactive lookbook is Mux-hosted so investors stream zero-latency reference video inside the deck — and the studio sees exactly how long they watched.</div>'));
+  var vc=verdictCard("develop"); if(vc) c.appendChild(vc);
+})();
+</script></body></html>

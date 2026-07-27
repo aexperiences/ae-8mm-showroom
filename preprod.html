@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pre-Production · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"preprod.html", crumb:"Pre-Production" }), d = E.db();
+  function verdictCard(key){ var r=E.consult(key); if(!r) return null; var v=r.verdict,p=r.passed,dp=r.dept;
+    return E.card('<div class="between"><div><h2>'+E.esc(dp.name)+' · the org\'s read</h2><div class="card-sub">'+E.esc(dp.dh.line)+'</div></div><div>'+E.tag((p?"released":"held")+" · "+v.conf+"%",p?"good":"watch")+'</div></div><div class="fence'+(p?'':' crim')+'">'+E.esc(v.stance)+'</div><div class="conf"><span class="muted small">bar '+dp.gate+'%</span><span class="conf-bar"><i class="conf-fill '+(p?'':'under')+'" style="width:'+v.conf+'%"></i><span class="conf-gate" style="left:'+dp.gate+'%"></span></span><span class="conf-n">'+v.conf+'%</span></div><ul class="reasons">'+v.reasons.map(function(x){return '<li><span class="rtag '+x.t+'">'+x.t.toUpperCase()+'</span><span>'+E.esc(x.s)+'</span></li>';}).join("")+'</ul>'); }
+  c.appendChild(E.page("Pre-Production & Logistics","Once a project is greenlit, the chaos begins. Script breakdown & tagging, the storyboard matrix, and the digital call-sheet generator — which pulls live weather, the nearest hospital, and crew travel times."));
+  c.appendChild(E.card('<h2>Digital call sheet — sample</h2><div class="card-sub">Auto-built from the shoot day. In the live build these fields ingest Tomorrow.io weather and Google Maps travel times.</div>'+
+    '<div class="grid g2">'+
+    '<div><table><tbody>'+
+      '<tr><td class="t-main">Production</td><td>Northshore Bank — Anthem Spot :60</td></tr>'+
+      '<tr><td class="t-main">Shoot day</td><td>3 of 5 · General call 06:30</td></tr>'+
+      '<tr><td class="t-main">Location</td><td>Downtown branch + rooftop</td></tr>'+
+      '<tr><td class="t-main">Weather</td><td>'+E.tag("Clear · 61°F · wind 6mph","good")+' <span class="muted small">(live feed)</span></td></tr>'+
+      '<tr><td class="t-main">Nearest hospital</td><td>Kootenai Health — 1.8 mi / 6 min</td></tr>'+
+      '<tr><td class="t-main">Parking / base camp</td><td>Lot C · shuttle every 15 min</td></tr>'+
+    '</tbody></table></div>'+
+    '<div><table><thead><tr><th>Breakdown tags — Scene 4</th></tr></thead><tbody>'+
+      ['CAST: Spokesperson, 2 featured extras','PROPS: Branded folder, tablet','WARDROBE: Business casual ×3','SFX: Haze, practical desk lamps','CAMERA: Alexa Mini LF + 32mm','ART: Reception set dressing'].map(function(x){return '<tr><td>'+E.esc(x)+'</td></tr>';}).join("")+
+    '</tbody></table></div></div>'));
+  c.appendChild(E.card('<h2>Productions in prep</h2><table><thead><tr><th>Production</th><th>Stage</th><th>Due</th><th class="num">Budget</th></tr></thead><tbody>'+
+    d.productions.filter(function(p){return p.stage==="Pre-Production"||p.stage==="Development";}).map(function(p){return '<tr><td class="t-main">'+E.esc(p.name)+'</td><td>'+E.tag(p.stage,"ghost")+'</td><td class="mono small">'+E.esc(p.dueDate)+'</td><td class="num">'+E.money(p.budget)+'</td></tr>';}).join("")+'</tbody></table>'));
+  var vc=verdictCard("production"); if(vc) c.appendChild(vc);
+})();
+</script></body></html>

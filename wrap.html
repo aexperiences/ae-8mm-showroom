@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wrap Book · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"wrap.html", crumb:"Wrap Book" }), d = E.db();
+  c.appendChild(E.page("The One-Click Wrap Book",
+    "The most painful admin task in film is the wrap — weeks of gathering every signed release, receipt, call sheet, camera log and final asset into one binder for the client and the insurer. 8mm compiles it for a project in one click, into a white-labeled portal. It only ships complete."));
+
+  var CATS = [["releases","Signed releases"],["receipts","Receipts & petty cash"],["callsheets","Call sheets"],["logs","Camera & sound logs"],["assets","Final delivery assets"]];
+
+  function prodCard(p) {
+    var w = E.wrapReadiness(p), done = w>=100;
+    var rows = CATS.map(function(cat){ var v=(p.wrap||{})[cat[0]]||[0,0]; var pc=v[1]?Math.round(v[0]/v[1]*100):0;
+      return '<tr><td class="t-main">'+E.esc(cat[1])+'</td><td class="num">'+v[0]+' / '+v[1]+'</td><td class="fillcell" style="width:200px"><div class="bar '+(pc>=100?"good":"")+'"><i style="width:'+pc+'%"></i></div></td></tr>'; }).join("");
+    var inner = '<div class="between"><div><h2>'+E.esc(p.name)+'</h2><div class="card-sub">'+E.esc(p.number)+' · '+E.esc(p.client)+' · '+E.esc(p.stage)+'</div></div>'+
+      '<div>'+(done?'<span class="chip clear">✓ '+w+'% — ready to compile</span>':'<span class="chip hold">'+w+'% — incomplete</span>')+'</div></div>'+
+      '<table><thead><tr><th>Wrap item</th><th class="num">Collected</th><th>Progress</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<div class="row" style="margin-top:12px"><button class="btn gold" data-compile="'+p.id+'"'+(p.delivered?' disabled':'')+'>⧉ Compile Wrap Book</button>'+
+      '<span class="muted small" style="max-width:44ch">Compiling stages a white-labeled client portal to the Approval Desk. It never sends or signs anything itself.</span></div>'+
+      '<div id="out_'+p.id+'"></div>';
+    return E.card(inner);
+  }
+  d.productions.filter(function(p){return p.stage!=="Development";}).forEach(function(p){ c.appendChild(prodCard(p)); });
+
+  setTimeout(function(){
+    Array.prototype.forEach.call(document.querySelectorAll("[data-compile]"), function(b){
+      b.addEventListener("click", function(){
+        var p = d.productions.filter(function(x){return x.id===b.dataset.compile;})[0];
+        var w = E.wrapReadiness(p), out = document.getElementById("out_"+p.id);
+        if (w>=100) {
+          E.stage("wrap","Wrap Book compiled — "+p.name, "Every release, receipt, call sheet, log and asset for "+p.number+" compiled into a white-labeled client portal.", "A wrap book leaves the studio — it goes to the Approval Desk for the producer to release.", "The Production chain");
+          out.innerHTML = '<div class="fence" style="margin-top:12px"><b>Compiled ✓</b> The full wrap book for '+E.esc(p.name)+' is staged on the Approval Desk as a white-labeled client portal. Nothing was sent — it is filed for you to release.</div>';
+          E.toast("Wrap book compiled and staged — nothing sent.","ok");
+        } else {
+          var missing = [];
+          [["releases","releases"],["receipts","receipts"],["callsheets","call sheets"],["logs","logs"],["assets","assets"]].forEach(function(cat){ var v=(p.wrap||{})[cat[0]]||[0,0]; if (v[0]<v[1]) missing.push((v[1]-v[0])+" "+cat[1]); });
+          out.innerHTML = '<div class="fence crim" style="margin-top:12px"><b>Can\'t compile yet.</b> The wrap book only ships complete. Still open: '+E.esc(missing.join(", "))+'. Signed releases come from the Clearance vault. <a href="clearances.html">Open clearances →</a></div>';
+          E.toast("Wrap incomplete — "+missing.length+" categories still open.","");
+        }
+      });
+    });
+  }, 0);
+})();
+</script></body></html>

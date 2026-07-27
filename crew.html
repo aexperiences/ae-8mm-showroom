@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crew & Gear · 8mm OS</title><link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eightmm.css"></head><body>
+<script src="eightmm.js"></script>
+<script>
+(function () {
+  var E = window.EightMM, c = E.mount({ active:"crew.html", crumb:"Crew & Gear" }), d = E.db();
+  c.appendChild(E.page("Crew & Gear","The two most expensive variables on any shoot: people and equipment. The freelance roster by day-rate and union status, and the QR gear tracker — scanned out to a project, tracked for damage and loss."));
+  c.appendChild(E.card('<h2>Freelance crew</h2><table><thead><tr><th>Name</th><th>Role</th><th>Day rate</th><th>Union</th><th>Owns gear</th><th>Status</th></tr></thead><tbody>'+
+    d.crew.map(function(x){return '<tr><td class="t-main">'+E.esc(x.name)+'</td><td>'+E.esc(x.role)+'</td><td class="mono small">'+E.esc(x.rate)+'</td><td>'+E.tag(x.union,"ghost")+'</td><td class="small muted">'+E.esc(x.gear||"—")+'</td><td>'+E.tag(x.status,x.status==="Available"?"good":"ghost")+'</td></tr>';}).join("")+'</tbody></table>'));
+  c.appendChild(E.card('<h2>Gear cage · QR tracker</h2><table><thead><tr><th>Item</th><th>Tag</th><th>Status</th><th>Out to</th></tr></thead><tbody>'+
+    d.gear.map(function(g){var k=g.status==="In"?"good":(g.status==="Repair"?"bad":"watch");return '<tr><td class="t-main">'+E.esc(g.item)+'</td><td class="k">'+E.esc(g.tag)+'</td><td>'+E.tag(g.status,k)+'</td><td class="small">'+E.esc(g.to)+'<div class="t-sub">'+E.esc(g.note)+'</div></td></tr>';}).join("")+'</tbody></table>'+
+    '<div class="srcnote">Every item scans out to a specific project ID — the same ID the Wrap Book compiles against.</div>'));
+})();
+</script></body></html>
