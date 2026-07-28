@@ -194,7 +194,7 @@
     grandsuite: { key:"grandsuite", name:"Grandsuite", rank:3, mo:2700, build:22000, desc:"The whole studio, nothing held back. Every department, the full agent org, and counsel.", base:"Multi-project · unlimited seats · dedicated environment", includes:["develop","clearances","preprod","crew","budget","post","wrap","books","hr","it","law","org"] }
   };
   var DEPTS = [
-    { group:"Command", items:[ { href:"dashboard.html", label:"Command Center", ic:"◎" }, { href:"approvals.html", label:"Approval Desk", ic:"✓", accent:"ops" } ]},
+    { group:"Command", items:[ { href:"dashboard.html", label:"Command Center", ic:"◎" }, { href:"calendar.html", label:"Calendar", ic:"▤" }, { href:"approvals.html", label:"Approval Desk", ic:"✓", accent:"ops" } ]},
     { group:"Development", items:[ { href:"develop.html", label:"Development & Pitch", ic:"◆", room:"develop", accent:"develop" } ]},
     { group:"The Production", items:[ { href:"preprod.html", label:"Pre-Production", ic:"▦", room:"preprod", accent:"preprod" }, { href:"crew.html", label:"Crew & Gear", ic:"⚙", room:"crew", accent:"crew" }, { href:"post.html", label:"Post & Review", ic:"⧉", room:"post", accent:"post" } ]},
     { group:"Compliance", items:[ { href:"clearances.html", label:"Clearances & Vault", ic:"⊛", room:"clearances", accent:"clear" }, { href:"wrap.html", label:"Wrap Book", ic:"❖", room:"wrap", accent:"wrap" } ]},
