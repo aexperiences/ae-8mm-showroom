@@ -189,9 +189,9 @@
     org:       { label:"Agent Org · Bus", mo:150, build:1300, why:"The ten AI department chains, the event bus, and the confidence gates. The studio's brain." }
   };
   var TIERS = {
-    lite: { key:"lite", name:"Lite", rank:1, mo:600, build:3800, desc:"The working studio. Development, clearances, pre-pro, crew & gear, and the budget.", base:"Single studio · up to 8 crew seats", includes:["develop","clearances","preprod","crew","budget"] },
-    standard: { key:"standard", name:"Standard", rank:2, mo:1300, build:9000, desc:"Adds post & review, the Wrap Book, studio metrics, HR, IT — and the agent org.", base:"Single studio · up to 25 seats", includes:["develop","clearances","preprod","crew","budget","post","wrap","books","hr","it","org"] },
-    grandsuite: { key:"grandsuite", name:"Grandsuite", rank:3, mo:2700, build:22000, desc:"The whole studio, nothing held back. Every department, the full agent org, and counsel.", base:"Multi-project · unlimited seats · dedicated environment", includes:["develop","clearances","preprod","crew","budget","post","wrap","books","hr","it","law","org"] }
+    lite: { key:"lite", name:"Single / Twin", rank:1, mo:500, build:3000, desc:"The working studio. Development, clearances, pre-pro, crew & gear, and the budget.", base:"Single studio · up to 8 crew seats", includes:["develop","clearances","preprod","crew","budget"] },
+    standard: { key:"standard", name:"Multiplex", rank:2, mo:1200, build:7600, desc:"Adds post & review, the Wrap Book, studio metrics, HR, IT — and the agent org.", base:"Single studio · up to 25 seats", includes:["develop","clearances","preprod","crew","budget","post","wrap","books","hr","it","org"] },
+    grandsuite: { key:"grandsuite", name:"Circuit", rank:3, mo:2800, build:12200, desc:"The whole studio, nothing held back. Every department, the full agent org, and counsel.", base:"Multi-project · unlimited seats · dedicated environment", includes:["develop","clearances","preprod","crew","budget","post","wrap","books","hr","it","law","org"] }
   };
   var DEPTS = [
     { group:"Command", items:[ { href:"dashboard.html", label:"Command Center", ic:"◎" }, { href:"calendar.html", label:"Calendar", ic:"▤" }, { href:"contacts.html", label:"Contacts", ic:"☎" }, { href:"connect.html", label:"Connect · Video", ic:"◉" }, { href:"records.html", label:"Records · Filing", ic:"▤" }, { href:"approvals.html", label:"Approval Desk", ic:"✓", accent:"ops" } ]},
