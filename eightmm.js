@@ -1,6 +1,6 @@
 /* ============================================================================
    8mm OS — SHOWROOM ENGINE
-   Boutique Film & Production Studio OS · Powered by Accelerated Experiences LLC
+   Boutique Film & Production Studio OS · AETRIAD Powered · Accelerated Experiences LLC
 
    BROWSER-ONLY SHOWROOM. sessionStorage, resets on idle. No backend, no network.
    AEHub canon: Founder -> COO -> DH -> AE -> Event Bus -> Pacemaker -> Triad,
@@ -349,7 +349,7 @@
     var frag = document.createDocumentFragment(); frag.appendChild(bar); frag.appendChild(menu); return frag;
   }
   function ribbon() { return el('<div class="ribbon"><span class="live">LIVE SHOWROOM</span> — this is the real OS, not a slideshow. Everything you type stays in your browser and resets when you leave. <a href="javascript:void(0)" id="resetFloor">Reset the floor</a></div>'); }
-  function footer() { return el('<div class="ae-credit">Powered by <b>Accelerated Experiences LLC</b> · 8mm OS is a white-label build. Demo data is a fictional studio; benchmark figures are estimates and tagged.</div>'); }
+  function footer() { return el('<div class="ae-credit"><a href="https://www.aexperiences.com/" class="ae-triad" aria-label="AETRIAD Powered - Accelerated Experiences LLC"><img src="/marks/aetriad-powered.png" alt="AETRIAD Powered" style="height:30px;width:auto;vertical-align:middle"></a><br>8mm OS is a white-label build. Demo data is a fictional studio; benchmark figures are estimates and tagged.</div>'); }
   /* The fleet-wide Command Center polish layer. One file on the store, loaded by
      every product, so a change lands everywhere at once instead of fourteen times. */
   function loadFlava(){
