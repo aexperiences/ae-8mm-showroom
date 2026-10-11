@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+<defs>
+<linearGradient id="tile" x1="0" y1="0" x2="0.35" y2="1">
+<stop offset="0%" stop-color="#b8866a"/><stop offset="46%" stop-color="#6e3c22"/><stop offset="100%" stop-color="#200e06"/></linearGradient>
+<linearGradient id="glare" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#fff" stop-opacity=".20"/><stop offset="44%" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<linearGradient id="pap" x1="0" y1="0" x2="0.3" y2="1">
+<stop offset="0%" stop-color="#fdfbf4"/><stop offset="100%" stop-color="#e8e2d2"/></linearGradient>
+<linearGradient id="gild" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#ffe08a"/><stop offset="100%" stop-color="#b98d1c"/></linearGradient>
+<linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#e3e8ec"/><stop offset="100%" stop-color="#8e99a2"/></linearGradient>
+<linearGradient id="wood" x1="0" y1="0" x2="0.2" y2="1">
+<stop offset="0%" stop-color="#a9743f"/><stop offset="100%" stop-color="#5d3c1c"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<linearGradient id="screen" x1="0" y1="0" x2="0.3" y2="1">
+<stop offset="0%" stop-color="#1d3a4e"/><stop offset="100%" stop-color="#0a1824"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#e0a83a"/><stop offset="100%" stop-color="#9a6f14"/></linearGradient>
+</defs>
+<rect width="1024" height="1024" fill="url(#tile)"/><rect width="1024" height="1024" fill="url(#glare)"/>
+<circle cx="512" cy="420" r="254" fill="#e0a83a" opacity="0.044"/><path d="M527 270 L512 110 L497 270 Z" fill="#e0a83a" opacity=".20"/><path d="M595 295 L624 227 L579 286 Z" fill="#e0a83a" opacity=".20"/><path d="M649 358 L780 265 L634 332 Z" fill="#e0a83a" opacity=".20"/><path d="M662 429 L735 420 L662 411 Z" fill="#e0a83a" opacity=".20"/><path d="M634 508 L780 575 L649 482 Z" fill="#e0a83a" opacity=".20"/><path d="M579 554 L624 613 L595 545 Z" fill="#e0a83a" opacity=".20"/><path d="M497 570 L512 730 L527 570 Z" fill="#e0a83a" opacity=".20"/><path d="M429 545 L400 613 L445 554 Z" fill="#e0a83a" opacity=".20"/><path d="M375 482 L244 575 L390 508 Z" fill="#e0a83a" opacity=".20"/><path d="M362 411 L289 420 L362 429 Z" fill="#e0a83a" opacity=".20"/><path d="M390 332 L244 265 L375 358 Z" fill="#e0a83a" opacity=".20"/><path d="M445 286 L400 227 L429 295 Z" fill="#e0a83a" opacity=".20"/>
+<path d="M0 806 L1024 806 L1024 1024 L0 1024 Z" fill="#200e06" opacity=".72"/><rect x="0" y="806" width="1024" height="5" fill="#fff" opacity=".10"/>
+<ellipse cx="512" cy="884" rx="330" ry="30" fill="#000" opacity=".45"/>
+<g transform="translate(160 776)"><rect x="0" y="0" width="704" height="30" rx="8" fill="url(#wood)"/><rect x="0" y="0" width="704" height="7" fill="#fff" opacity=".16"/><rect x="26" y="30" width="20" height="0" fill="#3c2612"/><rect x="658" y="30" width="20" height="0" fill="#3c2612"/></g><g transform="translate(316 290)"><rect width="392" height="486" rx="16" fill="#7a2a2a"/><rect width="392" height="486" rx="16" fill="url(#glass)"/><rect x="0" y="0" width="34" height="486" fill="#5d1d1d"/><rect x="68" y="42" width="286" height="18" rx="9" fill="url(#gild)"/><g transform="translate(210 270)"><circle r="112" fill="#3f1414"/><circle r="112" fill="none" stroke="url(#gild)" stroke-width="10"/><circle r="30" fill="#5d1d1d"/><circle cx="74" cy="0" r="22" fill="#5d1d1d"/><circle cx="37" cy="64" r="22" fill="#5d1d1d"/><circle cx="-37" cy="64" r="22" fill="#5d1d1d"/><circle cx="-74" cy="0" r="22" fill="#5d1d1d"/><circle cx="-37" cy="-64" r="22" fill="#5d1d1d"/><circle cx="37" cy="-64" r="22" fill="#5d1d1d"/></g><rect x="68" y="424" width="206" height="14" rx="7" fill="url(#gild)" opacity=".8"/></g><rect x="520" y="290" width="50" height="546" fill="#e0a83a"/><path d="M520 836 L545 800 L570 836 Z" fill="#9a6f14"/></svg>
