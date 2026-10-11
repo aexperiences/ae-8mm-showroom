@@ -44,7 +44,7 @@
 (function () {
   var T=window.EightMM;
   var c=T.mount({active:"records.html",crumb:"Records"});
-  var KEY="8mm_records_v1";
+  var KEY="8mm_records_v2";
 
   /* The filing plan — one cabinet per real thing the firm keeps. */
   var CABINETS=[
@@ -58,14 +58,16 @@
     {k:"firm",ic:"🏢",name:"The company",desc:"Formation, LLCs per picture, insurance."}
   ];
 
-  /* Seeded records — real McArthur artifacts where they exist, honestly labeled. */
-  var SEED=[
-    {cab:"clearances",name:"Chain of title — feature",kind:"pdf",tag:"sot",who:"Ray Castellano",when:"2026-03-18",note:"The file that lets it be sold."},
-    {cab:"productions",name:"Shooting schedule — week 3",kind:"xls",tag:"wip",who:"Desmond Hart",when:"2026-07-26",note:""},
-    {cab:"money",name:"Cost report — week 3",kind:"xls",tag:"sot",who:"Lena Fischer",when:"2026-07-27",note:""},
-    {cab:"insurance",name:"Production COI",kind:"pdf",tag:"sot",who:"Greta Nilsen",when:"2026-06-01",note:""},
-    {cab:"post",name:"Delivery specs — distributor",kind:"doc",tag:"sot",who:"Aiko Tanaka",when:"2026-07-10",note:""}
-  ];
+  /* Seeded records — built from this system's own book (its people, jobs and paperwork), never typed in. */
+  var SEED=(function(){ var D={}; try{ D=T.db()||{}; }catch(e){} var out=[], today=((T.TODAY instanceof Date)?T.TODAY:new Date()).toISOString().slice(0,10);
+    function add(cab,name,kind,tag,who,when,note){ if(name) out.push({cab:cab,name:String(name),kind:kind||"pdf",tag:tag||"",who:who||"",when:when||"",note:note||""}); }
+    function exp(d){ return !d||!/^\d{4}-/.test(d)?"":(d<today?"EXPIRED":"Expires "+d); }
+    try{ var PR=((D.crew||[]).filter(function(c){return /producer/i.test(c.role);})[0]||{}).name||"";
+      (D.productions||[]).forEach(function(p){ add("productions",p.name+" ("+p.number+") — production file","doc",p.delivered?"fin":"wip",PR,p.dueDate,p.stage); add("money","Cost report — "+p.name,"xls","sot",PR,"",""); if(/post|deliver/i.test(p.stage)) add("post","Deliverables — "+p.name,"doc",p.delivered?"fin":"wip",PR,p.dueDate,p.stage); });
+      (D.clearances||[]).forEach(function(c){ add("clearances",c.type+" — "+c.subject+" ("+c.production+")","pdf",c.signed?"sot":"",PR,"",c.signed?"Signed":"Not countersigned"); });
+      (D.crew||[]).forEach(function(c){ add("crew","Deal memo — "+c.name+" ("+c.role+")","pdf","sot",PR,"",c.union&&c.union!=="—"?c.union:""); });
+      (D.gear||[]).forEach(function(g){ add("insurance","Gear on the policy — "+g.item+" ("+g.tag+")","doc","sot",PR,"",g.status); }); }catch(e){}
+    return out; })();
 
   function load(){ try{ var d=JSON.parse(sessionStorage.getItem(KEY)); if(d&&d.length) return d; }catch(e){} return SEED.slice(); }
   function persist(){ try{ sessionStorage.setItem(KEY,JSON.stringify(FILES)); }catch(e){} }

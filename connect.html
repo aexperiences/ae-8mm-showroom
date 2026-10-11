@@ -78,13 +78,13 @@
   var T=window.EightMM;
   var c=T.mount({active:"connect.html",crumb:"Connect"});
   var API=window.AE8MM_API+'/api/connect'; var NS='8mm';
-  var TEAM=[
-    {slug:"ray-castellano",name:"Ray Castellano",role:"Executive Producer",init:"RC"},
-    {slug:"lena-fischer",name:"Lena Fischer",role:"Line Producer",init:"LF"},
-    {slug:"desmond-hart",name:"Desmond Hart",role:"Production Manager",init:"DH"},
-    {slug:"aiko-tanaka",name:"Aiko Tanaka",role:"Post Supervisor",init:"AT"},
-    {slug:"greta-nilsen",name:"Greta Nilsen",role:"Production Coordinator",init:"GN"}
-  ];
+  /* The team — read from this system's own seeded people, never typed in here. */
+  var TEAM=(function(){ var D={}; try{ D=T.db()||{}; }catch(e){} var out=[], seen={};
+    function add(n,r){ n=String(n||"").trim(); if(!n||seen[n]) return; seen[n]=1;
+      var w=n.replace(/^Coach\s+/,"").replace(/,.*$/,"").split(/\s+/);
+      out.push({slug:n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),name:n,role:String(r||""),init:(((w[0]||"")[0]||"")+(w.length>1?w[w.length-1][0]:((w[0]||"")[1]||""))).toUpperCase()}); }
+    try{ (D.crew||[]).forEach(function(c){ add(c.name,c.role); }); (D.team||[]).forEach(function(t){ if(t.type==="Human") add(t.name,t.role); }); }catch(e){}
+    return out; })();
   var CHANNELS=[
     {ch:"production",name:"# production",desc:"The whole slate"},
     {ch:"on-set",name:"# on-set",desc:"Today's unit"},
