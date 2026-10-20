@@ -196,13 +196,14 @@
     grandsuite: { key:"grandsuite", name:"Mothership", rank:3, mo:2800, build:0, desc:"The whole studio, nothing held back. Every department, the full agent org, and counsel.", base:"Multi-project · unlimited seats · dedicated environment", includes:["develop","clearances","preprod","crew","budget","post","wrap","books","hr","it","law","org"] }
   };
   var DEPTS = [
-    { group:"Command", items:[ { href:"dashboard.html", label:"Command Center", ic:"◎" }, { href:"calendar.html", label:"Calendar", ic:"▤" }, { href:"contacts.html", label:"Contacts", ic:"☎" }, { href:"connect.html", label:"Connect · Video", ic:"◉" }, { href:"records.html", label:"Records · Filing", ic:"▤" }, { href:"approvals.html", label:"Approval Desk", ic:"✓", accent:"ops" } ]},
+    { group:"Command", items:[ { href:"dashboard.html", label:"Command Center", ic:"◎" }, { href:"calendar.html", label:"Calendar", ic:"▤" }, { href:"contacts.html", label:"Contacts", ic:"☎" }, { href:"connect.html", label:"Connect · Video", ic:"◉" }, { href:"records.html", label:"Records · Filing", ic:"▤" }, { href:"approvals.html", label:"Approval Desk", ic:"✓", accent:"ops" }, { href:"masterlist.html", label:"Master List", ic:"✎" }, { href:"mail.html", label:"Mail", ic:"✉" } ]},
     { group:"Development", items:[ { href:"develop.html", label:"Development & Pitch", ic:"◆", room:"develop", accent:"develop" } ]},
-    { group:"The Production", items:[ { href:"preprod.html", label:"Pre-Production", ic:"▦", room:"preprod", accent:"preprod" }, { href:"crew.html", label:"Crew & Gear", ic:"⚙", room:"crew", accent:"crew" }, { href:"post.html", label:"Post & Review", ic:"⧉", room:"post", accent:"post" } ]},
-    { group:"Compliance", items:[ { href:"clearances.html", label:"Clearances & Vault", ic:"⊛", room:"clearances", accent:"clear" }, { href:"wrap.html", label:"Wrap Book", ic:"❖", room:"wrap", accent:"wrap" } ]},
+    { group:"The Production", items:[ { href:"preprod.html", label:"Pre-Production", ic:"▦", room:"preprod", accent:"preprod" }, { href:"crew.html", label:"Crew & Gear", ic:"⚙", room:"crew", accent:"crew" }, { href:"post.html", label:"Post & Review", ic:"⧉", room:"post", accent:"post" }, { href:"aimos.html", label:"Gear Cage", ic:"▦" } ]},
+    { group:"Compliance", items:[ { href:"clearances.html", label:"Clearances & Vault", ic:"⊛", room:"clearances", accent:"clear" }, { href:"wrap.html", label:"Wrap Book", ic:"❖", room:"wrap", accent:"wrap" }, { href:"documents.html", label:"Documents", ic:"▤" }, { href:"sign.html", label:"e-Sign", ic:"✍" } ]},
     { group:"Money", items:[ { href:"budget.html", label:"Budget & Accounting", ic:"◧", room:"budget", accent:"budget" }, { href:"books.html", label:"Studio Metrics", ic:"◭", room:"books", accent:"books" } ]},
     { group:"People & Systems", items:[ { href:"hr.html", label:"HR · People Ops", ic:"☷", room:"hr", accent:"hr" }, { href:"it.html", label:"IT · System Health", ic:"♥", room:"it", accent:"it" } ]},
-    { group:"Governance", items:[ { href:"law.html", label:"Law · Counsel", ic:"⚖", room:"law", accent:"law" }, { href:"org.html", label:"Agent Org · Bus", ic:"❖", room:"org", accent:"ops" } ]}
+    { group:"Governance", items:[ { href:"law.html", label:"Law · Counsel", ic:"⚖", room:"law", accent:"law" }, { href:"org.html", label:"Agent Org · Bus", ic:"❖", room:"org", accent:"ops" } ]},
+    { group:"The House", items:[ { href:"manual.html", label:"Owner's Manual", ic:"?" }, { href:"skins.html", label:"Skins", ic:"◐" } ] }
   ];
 
   var SEATS = {
