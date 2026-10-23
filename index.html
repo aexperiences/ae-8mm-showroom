@@ -1,72 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>8mm OS · Film Studio OS</title>
-<meta name="description" content="8mm OS — the operating system for a boutique film & production studio. Powered by Accelerated Experiences LLC.">
-<link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="eightmm.css">
-<link rel="canonical" href="https://www.aexperiences.com/apps/8mm/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Accelerated Experiences LLC">
-<meta property="og:title" content="8mm OS — Film &amp; production studio OS">
-<meta property="og:description" content="Productions, crew, call sheets, gear and post — from greenlight to delivery.">
-<meta property="og:url" content="https://www.aexperiences.com/apps/8mm/">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8mm OS — the operating system for a film and production studio</title>
+<meta name="description" content="8mm OS runs a boutique film and production studio end to end: pitches and development, pre-production and call sheets, crew and gear, post and client review, clearances and releases, the one-click wrap book, the budget against actuals. A white-label build by Accelerated Experiences LLC.">
+<link rel="canonical" href="https://aexperiences.studio/apps/8mm/">
+<meta property="og:title" content="8mm OS — film and production studio operating system">
+<meta property="og:description" content="From pitch to wrap: development, call sheets, crew and gear, post, clearances, and the one-click wrap book. Nothing delivers uncleared. Walk in and use it.">
 <meta property="og:image" content="https://www.aexperiences.com/8mm_OS.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aexperiences.studio/apps/8mm/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="8mm OS — Film &amp; production studio OS">
-<meta name="twitter:description" content="Productions, crew, call sheets, gear and post — from greenlight to delivery.">
-<meta name="twitter:image" content="https://www.aexperiences.com/8mm_OS.png">
+<link rel="icon" href="https://www.aexperiences.com/8mm_OS.png">
+<link rel="apple-touch-icon" href="https://www.aexperiences.com/8mm_OS.png">
+<meta name="theme-color" content="#8a6fd6">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap">
+<style>
+  :root{--card:#fffaf0;--sunk:#f4ecdc;--line:#e4d7bc;--ink:#211a14;--ink-2:#3d3128;--mut:#7a6d5e;--acc:#8a6fd6}
+  *{box-sizing:border-box}
+  body,.lede,.gf h3,.gf p,.gfoot,.alt a{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+  body{margin:0;font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(165deg,#55616f,#39434f 60%,#272e36);-webkit-font-smoothing:antialiased}
+  .gate{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:34px max(16px,env(safe-area-inset-right,0px)) 34px max(16px,env(safe-area-inset-left,0px))}
+  .gcard{max-width:940px;width:100%;background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.55)}
+  .gtop{display:flex;gap:18px;align-items:center;padding:30px 34px 24px;border-bottom:1px solid var(--line)}
+  .gtop img{width:74px;height:74px;border-radius:17px;display:block;flex:none}
+  .gtop h1{margin:0;font-size:27px;letter-spacing:-.01em;color:var(--ink);font-weight:700}
+  .gtop p{margin:5px 0 0;font-size:14px;color:var(--mut)}
+  .gbody{padding:26px 34px 30px}
+  .lede{font-size:16.5px;line-height:1.65;color:var(--ink-2);margin:0 0 22px;max-width:66ch}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
+  .gf{min-width:0}
+  .gf h3{margin:0 0 5px;font-size:13.5px;color:var(--ink)}
+  .gf p{margin:0;font-size:12.8px;line-height:1.55;color:var(--mut)}
+  .enter{display:inline-flex;align-items:center;gap:9px;background:var(--acc);color:#fff;border:none;padding:15px 26px;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;cursor:pointer}
+  .enter:hover{filter:brightness(.92)}
+  .enter:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+  .alt{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .alt a{font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:9px 14px;background:var(--card)}
+  .alt a:hover{border-color:var(--acc);color:var(--acc)}
+  .gfoot{padding:16px 34px;background:var(--sunk);font-size:12px;color:var(--mut);line-height:1.6}
+  .gfoot b{color:var(--ink-2)}
+  @media(max-width:760px){.gtop{padding:22px 20px 18px;gap:13px}.gtop img{width:56px;height:56px}.gtop h1{font-size:21px}.gbody{padding:20px}.grid3{grid-template-columns:1fr;gap:14px}.gfoot{padding:14px 20px}.enter{width:100%;justify-content:center}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-<div class="gate-wrap">
-  <main style="width:100%;max-width:740px">
-    <section class="card" style="padding:34px 36px 0;border-radius:16px;box-shadow:var(--sh-lg);margin-bottom:0">
-      <div class="row" style="gap:13px;align-items:center">
-        <div class="bmark" style="width:46px;height:46px" aria-hidden="true">
-          <img src="https://www.aexperiences.com/8mm_OS.png" alt="8mm OS" onerror="this.style.display='none';this.parentNode.classList.add('fallback')">
-          <svg class="fallback-mark" viewBox="0 0 32 32" width="28" height="28" style="display:none" aria-hidden="true"><g fill="none" stroke="#1a1710" stroke-width="1.7"><rect x="6" y="7" width="20" height="18" rx="2"/><circle cx="16" cy="16" r="4"/><path d="M6 11h3M6 21h3M23 11h3M23 21h3"/></g></svg>
-        </div>
-        <div>
-          <div style="font-size:21px;font-weight:800;letter-spacing:-.024em;line-height:1.15">8mm OS</div>
-          <div class="muted mono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:2px">Film Studio OS</div>
-        </div>
-        <span class="spacer"></span>
-        <span class="tag mono ghost">SHOWROOM</span>
-      </div>
-      <div class="divider" style="margin:22px 0 20px"></div>
-      <h1 style="font-size:27px;letter-spacing:-.028em;line-height:1.2">The whole studio,<br>from pitch to wrap.</h1>
-      <p style="font-size:14.5px;color:var(--ink-2);line-height:1.65;margin-top:14px;max-width:62ch">
-        8mm OS is the operating system for a boutique film &amp; production studio — the pitch and the pipeline, the
-        clearance vault, pre-pro and the call sheets, crew and gear, post and client review, the AICP budget, and a
-        ten-department agent org routing underneath all of it.
-      </p>
-      <div class="fence wrap" style="margin-top:18px">
-        <b>The One-Click Wrap Book.</b> When a shoot ends, the producer usually spends weeks gathering every signed
-        release, receipt, call sheet, camera log and final asset into one binder. 8mm compiles the whole thing for a
-        project in one click, into a white-labeled client portal. That's the button producers throw a credit card at.
-      </div>
-      <div class="fence crim" style="margin-top:14px">
-        <b>Nothing delivers uncleared.</b> The rights-gate holds the delivery vault shut until every release and license
-        for a project is signed. It's a copyright event, not a scheduling call — so the OS treats it like one.
-      </div>
-      <div class="fence" style="margin-top:14px">
-        <b>This is the real OS, not a slideshow.</b> It runs entirely in your browser. Everything you type stays in this
-        tab, nothing is uploaded, and the floor resets when you leave. Nothing here sends, spends, delivers or signs —
-        anything that would is staged on the Approval Desk instead.
-      </div>
-      <div class="divider" style="margin:24px 0 20px"></div>
-      <div class="row" style="gap:14px">
-        <a class="btn gold" href="dashboard.html" id="enter" style="padding:12px 22px;font-size:14px">Enter the studio &rarr;</a>
-        <span class="muted small" style="max-width:34ch;line-height:1.5">Opens on the full Grandsuite build with every department switched on.</span>
-      </div>
-      <div class="ae-credit" style="margin:26px -36px 0;padding:16px 36px 22px"><a href="https://www.aexperiences.com/" class="ae-triad" aria-label="AOS — Accelerated Experiences LLC"><img src="/marks/aos-badge.png" alt="AOS — Accelerated Operating Systems" style="height:30px;width:auto;vertical-align:middle"></a><br>8mm OS is a white-label build. Demo data is a fictional studio; benchmark figures are estimates and tagged.</div>
-    </section>
-  </main>
-</div>
+<div class="gate"><div class="gcard">
+  <div class="gtop">
+    <img src="https://www.aexperiences.com/8mm_OS.png" alt="8mm OS">
+    <div><h1>8mm OS</h1><p>The operating system for a film and production studio</p></div>
+  </div>
+  <div class="gbody">
+    <p class="lede">A production studio does not run on a calendar. It runs on the slate — where a pitch is a go or it is not, where a shoot is a call sheet, a crew list and a gear list that all have to agree, where a master cannot ship until every release is signed, and where the wrap book that closes the job used to take a producer two weeks. 8mm OS is built around that.</p>
+    <div class="grid3">
+      <div class="gf"><h3>Nothing delivers uncleared</h3><p>The delivery vault stays shut until every release and license for a project is signed. Unsigned releases are the first line on the home screen.</p></div>
+      <div class="gf"><h3>The one-click wrap book</h3><p>Every signed release, receipt, call sheet, camera log and final asset for a project, compiled in one click into a white-labeled client portal.</p></div>
+      <div class="gf"><h3>Development with a go/no-go</h3><p>Pitches marked GO move into development; the rest wait. The slate shows what is live, in pre-production and in post.</p></div>
+      <div class="gf"><h3>Crew and gear</h3><p>Who is on the shoot and what is on the truck. Gear out, gear in repair, and the piece that is about to make two shoots collide.</p></div>
+      <div class="gf"><h3>Budget against actuals</h3><p>The budget line by line against what was actually spent, so the production over budget is flagged while it can still be caught.</p></div>
+      <div class="gf"><h3>Post and client review</h3><p>Cuts in post with the client&#x27;s review in the same place, and the studio&#x27;s margin across the slate as one number.</p></div>
+    </div>
+    <a class="enter" id="enter" href="dashboard.html">Walk in and use it &rarr;</a>
+    <div class="alt">
+      <a href="clearances.html">Clear what blocks a delivery</a>
+      <a href="wrap.html">Compile a wrap book</a>
+      <a href="develop.html">Go or no-go on a pitch</a>
+      <a href="crew.html">Check the gear out</a>
+      <a href="budget.html">Budget against actuals</a>
+    </div>
+  </div>
+  <div class="gfoot">
+    This is the real system running in your browser, not a slideshow — everything you type stays on your device and
+    nothing is uploaded. It opens on a realistic sample studio; the ribbon at the top clears it so you can enter your own.
+    <b>8mm OS is a white-label build by Accelerated Experiences LLC.</b>
+    Nothing here is legal advice; a release is cleared when counsel says so.
+  </div>
+</div></div>
 <script src="eightmm.js"></script>
-<script>(function(){var E=window.EightMM;var a=document.getElementById("enter");if(a&&E)a.addEventListener("click",function(){E.resetFloor();});})();</script>
+<script>(function(){var E=window.EightMM;var a=document.getElementById("enter");if(a&&E&&E.resetFloor)a.addEventListener("click",function(){E.resetFloor();});})();</script>
 </body>
 </html>
