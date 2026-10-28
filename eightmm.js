@@ -352,7 +352,7 @@
     var frag = document.createDocumentFragment(); frag.appendChild(bar); frag.appendChild(menu); return frag;
   }
   function ribbon() { return el('<div class="ribbon"><span class="live">LIVE SHOWROOM</span> — this is the real OS, not a slideshow. Everything you type stays in your browser and resets when you leave. <a href="javascript:void(0)" id="resetFloor">Reset the floor</a></div>'); }
-  function footer() { return el('<div class="ae-credit"><a href="https://www.aexperiences.com/" class="ae-triad" aria-label="AOS — Accelerated Experiences LLC"><img src="/marks/aos-badge.png" alt="AOS — Accelerated Operating Systems" style="height:30px;width:auto;vertical-align:middle"></a><br>8mm OS is a white-label build. Demo data is a fictional studio; benchmark figures are estimates and tagged.</div>'); }
+  function footer() { return el('<div class="ae-credit"><a href="https://www.aexperiences.com/" class="ae-triad" aria-label="AOS — Accelerated Experiences LLC"><img src="/marks/aos-badge.png" alt="AOS — Accelerated Operating Systems" style="height:30px;width:auto;vertical-align:middle"></a><br>8mm OS is an Accelerated Operating System by Accelerated Experiences LLC. Demo data is a fictional studio; benchmark figures are estimates and tagged.</div>'); }
   /* The fleet-wide Command Center polish layer. One file on the store, loaded by
      every product, so a change lands everywhere at once instead of fourteen times. */
   function loadFlava(){
